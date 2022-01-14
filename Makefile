@@ -1,4 +1,4 @@
-# '-fvisibility=hidden' is the main culprit here, '-fvisibility-inlines-hidden' doesn't appear to make a different
+# '-fvisibility=hidden' is the main culprit here, '-fvisibility-inlines-hidden' doesn't appear to make a difference
 # (and there is no '-fvisibility-inlines-default')
 CXX=clang++ -std=c++17 -fvisibility=hidden -fvisibility-inlines-hidden
 
