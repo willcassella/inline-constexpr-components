@@ -1,0 +1,23 @@
+.PHONY: default clean
+
+CXX=cl.exe /MT /std:c++17
+
+default: foo.dll bar.dll main.exe
+
+clean:
+	powershell -command "rm *.dll,*.exp,*.lib,*.obj,*.exe"
+
+foo.h: export.h
+foo.cc: foo.h
+bar.h: export.h
+bar.cc: bar.h foo.h
+main.cc: foo.h bar.h
+
+foo.lib foo.dll: foo.cc Makefile.msvc
+	$(CXX) /D_USRDLL /D_WINDLL /DFOO_IMPL foo.cc /link /DLL /OUT:foo.dll
+
+bar.lib bar.dll: bar.cc foo.lib Makefile.msvc
+	$(CXX) /D_USRDLL /D_WINDLL /DBAR_IMPL bar.cc foo.lib /link /DLL /OUT:bar.dll
+
+main.exe: main.cc foo.lib bar.lib Makefile.msvc
+	$(CXX) main.cc foo.lib bar.lib

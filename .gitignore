@@ -1,3 +1,7 @@
 main
-libfoo.so
-libbar.so
+*.exe
+*.so
+*.dll
+*.exp
+*.lib
+*.obj
