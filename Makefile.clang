@@ -19,7 +19,7 @@ libfoo.so: foo.cc Makefile.clang
 	$(CXX) -DFOO_IMPL -shared foo.cc -o libfoo.so
 
 libbar.so: bar.cc libfoo.so Makefile.clang
-	$(CXX) -DBAR_IMPL -shared -lfoo bar.cc -o libbar.so
+	$(CXX) -DBAR_IMPL -fPIC -shared -L./ -lfoo -Wl,-rpath,./ bar.cc -o libbar.so
 
-main: main.cc libbar.so Makefile.clang
-	$(CXX) -lfoo -lbar main.cc -o main
+main: main.cc libfoo.so libbar.so Makefile.clang
+	$(CXX) -L./ -lfoo -lbar -Wl,-rpath,./ main.cc -o main

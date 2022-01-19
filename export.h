@@ -2,6 +2,6 @@
 #define IMPORT __declspec(dllimport)
 #define EXPORT __declspec(dllexport)
 #else
-#define IMPORT __attribute__((visibility("default")))
-#define EXPORT IMPORT
+#define IMPORT
+#define EXPORT __attribute__((visibility("default")))
 #endif

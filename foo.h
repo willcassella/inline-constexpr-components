@@ -11,4 +11,6 @@ struct FOO_EXPORT Foo {
     static const int kNonInlineVar = 1;
 };
 
+inline constexpr int kGlobalInlineVar = 1;
+
 FOO_EXPORT void foo_print_address();
